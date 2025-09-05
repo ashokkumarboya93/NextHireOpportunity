@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Higher Education Opportunities</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; 
+      padding: 0;
+      background: #f5f6fa;
+    }
+    header {
+      background: #2d3436;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .nav-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .home-btn {
+      background: #0984e3;
+      color: white;
+    }
+    .home-btn:hover {
+      background: #74b9ff;
+    }
+    .back-btn {
+      background: red;
+      color: white;
+    }
+    .back-btn:hover {
+      background: darkred;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px 20px;
+      width: 220px;      /* increased width */
+      height: 70px;     /* increased height */
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background: #dfe6e9;
+    }
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #2d3436;
+    }
+    .education-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
+      text-align: left;
+    }
+    .education-details {
+      padding: 20px;
+      display: none;
+    }
+    .education-details h2 {
+      margin-top: 0;
+      color: #2d3436;
+    }
+    .apply-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .apply-btn:hover {
+      background: #55efc4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="nav-btn home-btn" onclick="goHome()">🏠 Home</button>
+    <h1>Higher Education after B.Tech</h1>
+    <button class="nav-btn back-btn" id="backEduBtn" onclick="showEducationList()">⬅ Back</button>
+  </header>
+
+  <div class="container" id="educationList"></div>
+  <div class="education-details" id="educationDetails"></div>
+
+  <script>
+    const universities = [
+      {
+        course: "M.Tech in Computer Science",
+        name: "Indian Institute of Technology (IIT)",
+        location: "Various Locations in India",
+        specialization: "Computer Science, Electrical, Mechanical, Civil, etc.",
+        admission: "Through GATE entrance exam",
+        link: "https://www.iitb.ac.in"
+      },
+      {
+        course: "MBA in Technology Management",
+        name: "National Institute of Technology (NIT)",
+        location: "Various Locations in India",
+        specialization: "Management, Finance, IT",
+        admission: "Through CAT/MAT entrance exam",
+        link: "https://www.nitw.ac.in"
+      },
+      {
+        course: "PhD in Engineering",
+        name: "Indian Institute of Science (IISc) Bangalore",
+        location: "Bangalore, Karnataka",
+        specialization: "Advanced Research in Science & Engineering",
+        admission: "Entrance exam + Interview",
+        link: "https://iisc.ac.in"
+      },
+      {
+        course: "M.Tech in Data Science",
+        name: "Jawaharlal Nehru University (JNU)",
+        location: "New Delhi",
+        specialization: "Data Science, AI, IT, Computational Studies",
+        admission: "Through University Entrance Test",
+        link: "https://www.jnu.ac.in"
+      },
+      {
+        course: "MBA in Business Analytics",
+        name: "BITS Pilani",
+        location: "Pilani, Rajasthan",
+        specialization: "Business Analytics, Finance, Marketing",
+        admission: "Through BITSAT/MAT/CAT",
+        link: "https://www.bits-pilani.ac.in"
+      },
+      {
+        course: "M.Tech in Artificial Intelligence",
+        name: "Vellore Institute of Technology (VIT)",
+        location: "Vellore, Tamil Nadu",
+        specialization: "AI, Machine Learning, Cloud Computing",
+        admission: "Through VITMEE entrance test",
+        link: "https://vit.ac.in"
+      },
+      {
+        course: "M.Sc in Robotics",
+        name: "SRM Institute of Science and Technology",
+        location: "Chennai, Tamil Nadu",
+        specialization: "Robotics, Automation, Mechatronics",
+        admission: "Through SRMJEEE PG entrance exam",
+        link: "https://www.srmist.edu.in"
+      },
+      {
+        course: "M.Tech in Cyber Security",
+        name: "Delhi Technological University (DTU)",
+        location: "New Delhi",
+        specialization: "Cyber Security, Networks, Cryptography",
+        admission: "Through GATE / DTU entrance test",
+        link: "http://www.dtu.ac.in"
+      },
+      {
+        course: "MBA in International Business",
+        name: "Amity University",
+        location: "Noida, Uttar Pradesh",
+        specialization: "International Business, Finance, Marketing",
+        admission: "Through MAT/CAT/University entrance exam",
+        link: "https://www.amity.edu"
+      },
+      {
+        course: "M.Tech in Biotechnology",
+        name: "Manipal Academy of Higher Education",
+        location: "Manipal, Karnataka",
+        specialization: "Biotechnology, Biomedical, Bioinformatics",
+        admission: "Through MU-OET entrance test",
+        link: "https://manipal.edu"
+      }
+    ];
+
+    function showEducationList() {
+      document.getElementById("backEduBtn").style.display = "none";
+      document.getElementById("educationDetails").style.display = "none";
+      document.getElementById("educationList").style.display = "flex";
+
+      let eduHTML = "";
+      universities.forEach((uni, index) => {
+        eduHTML += `
+          <div class="card" onclick="showEducationDetails(${index})">
+            <h3>${uni.course}</h3>
+          </div>
+        `;
+      });
+      document.getElementById("educationList").innerHTML = eduHTML;
+    }
+
+    function showEducationDetails(index) {
+      const uni = universities[index];
+      document.getElementById("educationList").style.display = "none";
+      document.getElementById("backEduBtn").style.display = "inline-block";
+      const details = `
+        <div class="education-card">
+          <h2>${uni.course}</h2>
+          <p><b>University:</b> ${uni.name}</p>
+          <p><b>Location:</b> ${uni.location}</p>
+          <p><b>Specialization:</b> ${uni.specialization}</p>
+          <p><b>Admission Process:</b> ${uni.admission}</p>
+          <a href="${uni.link}" target="_blank" class="apply-btn">Apply Now</a>
+        </div>
+      `;
+      document.getElementById("educationDetails").innerHTML = details;
+      document.getElementById("educationDetails").style.display = "block";
+    }
+
+    function goHome() {
+      window.location.href = "home.html"; // update if your homepage has a different filename
+    }
+
+    // Initial load
+    showEducationList();
+  </script>
+</body>
+</html>

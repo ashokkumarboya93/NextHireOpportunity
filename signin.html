@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Sign In</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      color: #0077b6;
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 360px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .box h2 {
+      color: #0077b6;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .box input, .box select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    .box button {
+      width: 100%;
+      padding: 12px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    .box button:hover {
+      background: #005f87;
+    }
+    .back-btn {
+      background: #ff6b6b;
+    }
+    .back-btn:hover {
+      background: #e63946;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Visible Title on Page -->
+  <header>
+    <h1>New Sign In</h1>
+  </header>
+
+  <!-- Sign Up Form -->
+  <div class="box">
+    <h2>Create Your Account</h2>
+    <form id="signupForm">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <input type="password" placeholder="Confirm Password" required>
+      <input type="tel" placeholder="Phone Number" required pattern="[0-9]{10}">
+      <select required>
+        <option value="">Select Branch/Department</option>
+        <option value="CSE">Computer Science Engineering</option>
+        <option value="CDS">Data Science Engineering</option>
+        <option value="ECE">Electronics & Communication</option>
+        <option value="EEE">Electrical Engineering</option>
+        <option value="ME">Mechanical Engineering</option>
+        <option value="CE">Civil Engineering</option>
+        <option value="Other">Other</option>
+      </select>
+      <button type="submit">Sign Up</button>
+      <button type="button" class="back-btn" onclick="window.location.href='home.html'">Back</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      window.location.href = "home.html"; // redirect after signup
+    });
+  </script>
+
+</body>
+</html>

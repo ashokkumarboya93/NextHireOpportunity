@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.Tech Private Job Opportunities</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; 
+      padding: 0;
+      background: #f5f6fa;
+    }
+    header {
+      background: #2d3436;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* places home left, title center, back right */
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .nav-btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .home-btn {
+      background: #0984e3;
+      color: white;
+    }
+    .home-btn:hover {
+      background: #74b9ff;
+    }
+    .back-btn {
+      background: red;
+      color: white;
+      display: none; /* hidden until job details show */
+    }
+    .back-btn:hover {
+      background: darkred;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 220px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background: #dfe6e9;
+    }
+    .job-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
+      text-align: left;
+    }
+    .job-details {
+      padding: 20px;
+      display: none;
+    }
+    .job-details h2 {
+      margin-top: 0;
+      color: #2d3436;
+    }
+    .apply-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .apply-btn:hover {
+      background: #55efc4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="nav-btn home-btn" onclick="goHome()">🏠 Home</button>
+    <h1>Private Job Opportunities after B.Tech</h1>
+    <button class="nav-btn back-btn" id="backJobsBtn" onclick="showJobList()">⬅ Back</button>
+  </header>
+
+  <div class="container" id="jobList"></div>
+  <div class="job-details" id="jobDetails"></div>
+
+  <script>
+    const jobs = [
+      {
+        title: "Software Engineer (Infosys)",
+        salary: "₹3.6 - ₹6 LPA",
+        age: "Freshers Eligible",
+        eligibility: "B.Tech in CSE/IT/ECE/EEE/Mechanical/Civil",
+        preparation: "Aptitude + Coding + Communication",
+        process: "Infosys Campus/Online Test",
+        link: "https://www.infosys.com"
+      },
+      {
+        title: "Graduate Engineer Trainee (TCS)",
+        salary: "₹3.5 - ₹7 LPA",
+        age: "Freshers Eligible",
+        eligibility: "B.Tech all branches",
+        preparation: "TCS NQT (Aptitude + Coding)",
+        process: "Apply through TCS NextStep portal",
+        link: "https://nextstep.tcs.com"
+      },
+      {
+        title: "Associate Engineer (Wipro)",
+        salary: "₹3 - ₹6 LPA",
+        age: "Freshers Eligible",
+        eligibility: "B.Tech in CSE/IT/ECE/EEE",
+        preparation: "Online Test + Interview",
+        process: "Apply via Wipro Careers",
+        link: "https://careers.wipro.com"
+      },
+      {
+        title: "Analyst (Capgemini)",
+        salary: "₹3.8 - ₹6.5 LPA",
+        age: "Freshers Eligible",
+        eligibility: "B.Tech in CSE/IT/EEE/ECE/Mech",
+        preparation: "Aptitude + Technical Interview",
+        process: "Capgemini Hiring Assessment",
+        link: "https://www.capgemini.com"
+      },
+      {
+        title: "System Engineer (Cognizant)",
+        salary: "₹3 - ₹6 LPA",
+        age: "Freshers Eligible",
+        eligibility: "B.Tech all branches",
+        preparation: "Aptitude + Communication Skills",
+        process: "Cognizant GenC Hiring",
+        link: "https://careers.cognizant.com"
+      },
+      {
+        title: "Associate Consultant (Accenture)",
+        salary: "₹4 - ₹8 LPA",
+        age: "Freshers & Experienced",
+        eligibility: "B.Tech all branches",
+        preparation: "Online Test + Group Discussion + Interview",
+        process: "Accenture Campus/Direct Hiring",
+        link: "https://www.accenture.com"
+      },
+      {
+        title: "Design Engineer (Tech Mahindra)",
+        salary: "₹3 - ₹6.5 LPA",
+        age: "Freshers Eligible",
+        eligibility: "B.Tech in Mechanical/Civil/EEE/ECE",
+        preparation: "Technical + Aptitude Round",
+        process: "Tech Mahindra Careers Portal",
+        link: "https://careers.techmahindra.com"
+      },
+      {
+        title: "Data Analyst (HCL)",
+        salary: "₹4 - ₹7 LPA",
+        age: "Freshers & Experienced",
+        eligibility: "B.Tech in CSE/IT/ECE/EEE",
+        preparation: "SQL + Excel + Python",
+        process: "HCL Aptitude Test + Interview",
+        link: "https://www.hcltech.com"
+      },
+      {
+        title: "Business Analyst (Deloitte)",
+        salary: "₹5 - ₹9 LPA",
+        age: "Freshers & Experienced",
+        eligibility: "B.Tech in CSE/IT/ECE/EEE/Mech",
+        preparation: "Case Studies + Aptitude",
+        process: "Deloitte Online Test + Interview",
+        link: "https://www.deloitte.com"
+      },
+      {
+        title: "Cloud Engineer (Amazon AWS)",
+        salary: "₹6 - ₹12 LPA",
+        age: "Freshers & Experienced",
+        eligibility: "B.Tech in CSE/IT/ECE",
+        preparation: "Cloud + Networking + Coding",
+        process: "Amazon Careers Portal",
+        link: "https://www.amazon.jobs"
+      }
+    ];
+
+    function showJobList() {
+      document.getElementById("backJobsBtn").style.display = "none";
+      document.getElementById("jobDetails").style.display = "none";
+      document.getElementById("jobList").style.display = "flex";
+
+      let jobHTML = "";
+      jobs.forEach((job, index) => {
+        jobHTML += `
+          <div class="card" onclick="showJobDetails(${index})">
+            <h3>${job.title}</h3>
+          </div>
+        `;
+      });
+      document.getElementById("jobList").innerHTML = jobHTML;
+    }
+
+    function showJobDetails(index) {
+      const job = jobs[index];
+      document.getElementById("jobList").style.display = "none";
+      document.getElementById("backJobsBtn").style.display = "inline-block";
+      const details = `
+        <div class="job-card">
+          <h2>${job.title}</h2>
+          <p><b>Salary:</b> ${job.salary}</p>
+          <p><b>Age Limit:</b> ${job.age}</p>
+          <p><b>Eligibility:</b> ${job.eligibility}</p>
+          <p><b>Preparation:</b> ${job.preparation}</p>
+          <p><b>Application Process:</b> ${job.process}</p>
+          <a href="${job.link}" target="_blank" class="apply-btn">Apply Now</a>
+        </div>
+      `;
+      document.getElementById("jobDetails").innerHTML = details;
+      document.getElementById("jobDetails").style.display = "block";
+    }
+
+    function goHome() {
+      window.location.href = "home.html"; // change to your homepage
+    }
+
+    // Initial Load
+    showJobList();
+  </script>
+</body>
+</html>

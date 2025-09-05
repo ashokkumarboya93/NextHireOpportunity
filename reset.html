@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set New Password</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      color: #0077b6;
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 360px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .box h2 {
+      color: #0077b6;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    .box button {
+      width: 100%;
+      padding: 12px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    .box button:hover {
+      background: #005f87;
+    }
+    .back-btn {
+      background: #ff6b6b;
+    }
+    .back-btn:hover {
+      background: #e63946;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Visible Title -->
+  <header>
+    <h1>Set New Password</h1>
+  </header>
+
+  <!-- Forgot Password Form -->
+  <div class="box">
+    <h2>Reset Your Password</h2>
+    <form id="forgotForm">
+      <input type="email" placeholder="Enter Registered Email" required>
+      <input type="password" placeholder="Enter New Password" required>
+      <input type="password" placeholder="Confirm New Password" required>
+      <button type="submit">Submit</button>
+      <button type="button" class="back-btn" onclick="window.location.href='home.html'">Back</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("forgotForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Your password has been re-set successfully!");
+      window.location.href = "home.html"; // redirect after reset
+    });
+  </script>
+
+</body>
+</html>
