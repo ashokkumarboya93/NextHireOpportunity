@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.Tech Job Opportunities</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f5f6fa;
+    }
+    header {
+      background: #2d3436;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      position: relative;
+    }
+    .home-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #0984e3;
+      color: white;
+    }
+    .home-btn:hover {
+      background: #74b9ff;
+    }
+    .back-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      background: red;
+      color: white;
+      display: none;
+    }
+    .back-btn:hover {
+      background: darkred;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 20px;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 220px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background: #dfe6e9;
+    }
+    .job-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
+    }
+    .job-details {
+      padding: 20px;
+      display: none;
+    }
+    .job-details h2 {
+      margin-top: 0;
+      color: #2d3436;
+    }
+    .apply-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00b894;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .apply-btn:hover {
+      background: #55efc4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Governments Job Opportunities after B.Tech
+    <button class="home-btn" onclick="goHome()">🏠 Home</button>
+    <button class="back-btn" id="backJobsBtn" onclick="showJobList()">⬅ Back</button>
+  </header>
+
+  <div class="container" id="jobList"></div>
+  <div class="job-details" id="jobDetails"></div>
+
+  <script>
+    const jobs = [
+      {
+        title: "Indian Engineering Services (IES)",
+        salary: "₹56,100 - ₹1,77,500 per month",
+        age: "21 - 30 years",
+        eligibility: "B.Tech in any branch (recognized university)",
+        preparation: "UPSC Engineering Services Exam",
+        process: "Apply through UPSC official site",
+        link: "https://www.upsc.gov.in"
+      },
+      {
+        title: "Graduate Engineer Trainee (Infosys)",
+        salary: "₹3.6 - ₹5 LPA",
+        age: "No strict limit (Freshers preferred)",
+        eligibility: "B.Tech (CSE, IT, ECE, EEE, Mechanical, Civil)",
+        preparation: "Aptitude + Coding + Communication",
+        process: "Campus/Online Recruitment",
+        link: "https://www.infosys.com"
+      },
+      {
+        title: "Bank PO (SBI / IBPS)",
+        salary: "₹41,960 + allowances",
+        age: "20 - 30 years",
+        eligibility: "Any B.Tech/Graduation degree",
+        preparation: "Quantitative Aptitude, Reasoning, English, GK",
+        process: "Apply via IBPS/SBI portals",
+        link: "https://ibps.in"
+      },
+      {
+        title: "ISRO Scientist/Engineer",
+        salary: "₹56,100 + allowances",
+        age: "21 - 35 years",
+        eligibility: "B.Tech with minimum 65%",
+        preparation: "ISRO written exam + interview",
+        process: "Apply through ISRO careers",
+        link: "https://www.isro.gov.in"
+      },
+      {
+        title: "Software Developer (TCS)",
+        salary: "₹3.5 - ₹7 LPA",
+        age: "Freshers eligible",
+        eligibility: "B.Tech in CSE/IT/ECE/EEE",
+        preparation: "Aptitude + Coding round",
+        process: "TCS NQT Exam",
+        link: "https://nextstep.tcs.com"
+      },
+      {
+        title: "Defence (Technical Entry - Indian Army/Navy/Airforce)",
+        salary: "₹56,000 - ₹2,50,000",
+        age: "21 - 27 years",
+        eligibility: "B.Tech in relevant stream",
+        preparation: "Written test + SSB Interview",
+        process: "Apply via joinindianarmy.nic.in",
+        link: "https://joinindianarmy.nic.in"
+      },
+      {
+        title: "Civil Services (IAS/IPS/IFS)",
+        salary: "₹56,100 - ₹2,50,000",
+        age: "21 - 32 years",
+        eligibility: "Any B.Tech degree",
+        preparation: "UPSC Civil Services Exam",
+        process: "Apply through UPSC",
+        link: "https://www.upsc.gov.in"
+      },
+      {
+        title: "PSU Jobs (ONGC, NTPC, BHEL, GAIL)",
+        salary: "₹60,000 - ₹1,80,000",
+        age: "21 - 30 years",
+        eligibility: "B.Tech + GATE score",
+        preparation: "GATE Exam",
+        process: "Apply through PSU portals",
+        link: "https://www.ongcindia.com"
+      },
+      {
+        title: "Data Analyst (Wipro)",
+        salary: "₹4 - ₹6 LPA",
+        age: "Freshers eligible",
+        eligibility: "B.Tech in CSE/IT/ECE/EEE",
+        preparation: "SQL, Python, Excel, Communication",
+        process: "Online Test + Interview",
+        link: "https://careers.wipro.com"
+      },
+      {
+        title: "Research Scientist (DRDO)",
+        salary: "₹56,100 - ₹1,77,500",
+        age: "21 - 30 years",
+        eligibility: "B.Tech with GATE score",
+        preparation: "DRDO written test + interview",
+        process: "Apply via rac.gov.in",
+        link: "https://rac.gov.in"
+      }
+    ];
+
+    function showJobList() {
+      document.getElementById("backJobsBtn").style.display = "none";
+      document.getElementById("jobDetails").style.display = "none";
+      document.getElementById("jobList").style.display = "flex";
+
+      let jobHTML = "";
+      jobs.forEach((job, index) => {
+        jobHTML += `
+          <div class="card" onclick="showJobDetails(${index})">
+            <h3>${job.title}</h3>
+          </div>
+        `;
+      });
+      document.getElementById("jobList").innerHTML = jobHTML;
+    }
+
+    function showJobDetails(index) {
+      const job = jobs[index];
+      document.getElementById("jobList").style.display = "none";
+      document.getElementById("backJobsBtn").style.display = "inline-block";
+      const details = `
+        <div class="job-card">
+          <h2>${job.title}</h2>
+          <p><b>Salary:</b> ${job.salary}</p>
+          <p><b>Age Limit:</b> ${job.age}</p>
+          <p><b>Eligibility:</b> ${job.eligibility}</p>
+          <p><b>Preparation:</b> ${job.preparation}</p>
+          <p><b>Application Process:</b> ${job.process}</p>
+          <a href="${job.link}" target="_blank" class="apply-btn">Apply Now</a>
+        </div>
+      `;
+      document.getElementById("jobDetails").innerHTML = details;
+      document.getElementById("jobDetails").style.display = "block";
+    }
+
+    function goHome() {
+      window.location.href = "home.html"; // change this to your homepage URL
+    }
+
+    // Initial Load
+    showJobList();
+  </script>
+</body>
+</html>
